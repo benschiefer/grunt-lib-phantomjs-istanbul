@@ -11,13 +11,16 @@
 'use strict';
 
 var fs = require('fs');
+var system = require('system');
 
+//console.log(JSON.stringify(system.args));
 // The temporary file used for communications.
-var tmpfile = phantom.args[0];
+var tmpfile = system.args[1];
 // The page .html file to load.
-var url = phantom.args[1];
+var url = system.args[2];
 // Extra, optionally overridable stuff.
-var options = JSON.parse(phantom.args[2] || {});
+var options = JSON.parse(system.args[3] || {});
+
 // load instrumented file data from the file/transport
 var instrumentedFiles = {};
 var useInstrumentedFiles = false;
@@ -142,7 +145,7 @@ page.onResourceRequested = function(request, networkRequest) {
       } catch (e) {}
     }
   }
-  
+
   // Phantom can not serve static content at this point.
   // So the file is stored in a temp dictionary and phantom is rerouted.
   // The name of the temp file is an escaped version of the original path.
