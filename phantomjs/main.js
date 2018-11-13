@@ -51,6 +51,7 @@ var page = require('webpage').create(options.page);
 // Abort if the page doesn't send any messages for a while.
 setInterval(function() {
   if (new Date() - last > options.timeout) {
+      sendMessage('console', page);
     sendMessage('fail.timeout');
     if (options.screenshot) {
       page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
