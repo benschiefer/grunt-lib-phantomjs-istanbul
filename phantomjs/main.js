@@ -205,5 +205,13 @@ page.onLoadFinished = function(status) {
   }
 };
 
+page.onResourceError = function(resourceError) {
+    sendMessage('onResourceError', resourceError);
+};
+
+page.onResourceTimeout = function(request) {
+    sendMessage('onResourceTimeout', request);
+};
+
 // Actually load url.
 page.open(url);
